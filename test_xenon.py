@@ -118,9 +118,11 @@ class CheckTestCase(unittest.TestCase):
 class InfractionsTestCase(unittest.TestCase):
 
     def setParameters(self, results, args, infractions):
-        r = {}
-        for k, v in results.items():
-            r[k] = [dict(name='block', complexity=cc, lineno=1) for cc in v]
+        r = {
+            k: [dict(name='block', complexity=cc, lineno=1) for cc in v]
+            for k, v in results.items()
+        }
+
         self.r = r
         self.args = Args(*args)
         self.logger = CatchAll()

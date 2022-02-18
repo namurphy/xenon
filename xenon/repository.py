@@ -9,8 +9,7 @@ FORMAT = '%n'.join(['%H', '%aN', '%ae', '%at', '%cN', '%ce', '%ct', '%s'])
 def git(*args):
     p = subprocess.Popen(['git'] + list(args), stdout=subprocess.PIPE)
     out, _ = p.communicate()
-    ret = p.poll()
-    if ret:
+    if ret := p.poll():
         raise subprocess.CalledProcessError(ret, 'git', output=out)
     return out.decode('utf-8')
 
